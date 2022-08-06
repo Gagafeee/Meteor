@@ -5,7 +5,7 @@ var deadPanel = document.getElementById("dead-panel");
 var velocity = 0;
 var difficulty = 10;
 var pgenerated = document.getElementById("generated-planete");
-var scoreDisplay = document.getElementById("score-displayer").firstChild;
+var scoreDisplay = document.getElementById("score-displayer");
 var score = 0;
 
 function Load() {
@@ -36,7 +36,7 @@ function Load() {
 
 function Play() {
     //setup
-
+    score = 0;
     var planetes = document.getElementsByClassName("planete");
     var planetesgene = pgenerated.getElementsByClassName("planete-generated");
     game_content.style.setProperty("--speed", globalSpeed + "s");
@@ -70,10 +70,11 @@ function Play() {
             });
         }
     });
-    P()
+    
     setTimeout(() => {
         
         game_content.dataset.running = "true";
+        P()
         //game running
         var game = setInterval(() => {
             if (game_content.dataset.running == "false") { clearInterval(game) }
@@ -134,7 +135,7 @@ function Play() {
             }
             //add score
             score++;
-            scoreDisplay.innerHTML = score;
+            scoreDisplay.innerText = score;
         }, 100);
     }, 500);
 
@@ -182,7 +183,8 @@ function StopGame() {
         }
         P()
         scoreTitle.innerText = "Last score : " + score;
-        document.cookie = "score=" + score
+        setCookie("score", score, 1000)
+        
     }
 
 }
@@ -202,3 +204,13 @@ function getCookie(cname) {
     }
     return "";
   }
+
+
+  function setCookie(c_name,c_value,exdays) {
+    var exdate=new Date();
+    exdate.setDate(exdate.getDate() + exdays);
+    document.cookie=encodeURIComponent(c_name) 
+      + "=" + encodeURIComponent(c_value)
+      + (!exdays ? "" : "; expires="+exdate.toUTCString());
+      ;
+ }

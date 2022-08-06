@@ -52,20 +52,14 @@ body {
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.3);
-
     display: flex;
     align-items: center;
-    padding: 0 20px 0 20px ;
-
-}
-
-#game-content[data-running="true"] #score-displayer p {
+    padding: 0 20px 0 20px;
     color: #fff;
     font-size: 3vw;
     font-weight: 700;
     font-family: Chakra Petch;
 }
-
 #game-content[data-running="true"] #dead-panel {
     display: none;
 }
@@ -146,18 +140,19 @@ body {
     user-select: none;
     cursor: pointer;
 }
-#dead-panel .action-container .button:hover{
+
+#dead-panel .action-container .button:hover {
     animation: flick 1s linear infinite;
 }
 
 @keyframes flick {
-    0%{
+    0% {
         transform: scale(1);
     }
-    50%{
+    50% {
         transform: scale(1.05)
     }
-    100%{
+    100% {
         transform: scale(1)
     }
 }
@@ -194,6 +189,138 @@ body {
     left: 0;
     background: inherit;
     border-radius: inherit;
+}
+
+#dead-panel #infos {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 30vw;
+    height: 10vh;
+    /*background-color: red;*/
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#dead-panel #infos p {
+    color: #fff;
+    font-size: 1.5vw;
+    font-weight: 100;
+    font-family: Chakra Petch;
+}
+
+#dead-panel #social-container li:nth-child(3) .displayer {
+    display: none;
+    opacity: 0;
+    display: block;
+    position: relative;
+    left: -40px;
+    bottom: 50px;
+    min-width: 150px;
+    height: 40px;
+    /* From https://css.glass */
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s;
+}
+
+#dead-panel #social-container li:nth-child(3):hover .displayer {
+    display: block;
+    position: relative;
+    left: -40px;
+    bottom: 50px;
+    min-width: 150px;
+    height: 40px;
+    /* From https://css.glass */
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: all 0.5s;
+}
+
+#dead-panel #social-container .displayer p {
+    font-size: 1vw;
+    text-decoration: none;
+}
+
+#dead-panel #social-container ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+#dead-panel #social-container ul li {
+    list-style: none;
+    margin: 0 15px;
+}
+
+#dead-panel #social-container ul li a {
+    position: relative;
+    display: block;
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    line-height: 60px;
+    border-radius: 50%;
+    font-size: 30px;
+    color: #666;
+    transition: .5s;
+    background-image: var(--outline);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 3vw;
+    /* From https://css.glass */
+    background-color: rgba(48, 48, 48, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(216, 216, 216, 0.651);
+}
+
+#dead-panel #social-container ul li a:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: transparent;
+    transition: .5s;
+    transform: scale(.9);
+    z-index: -1;
+}
+
+#dead-panel #social-container ul li a:hover:before {
+    transform: scale(1.2);
+    box-shadow: 0 0 15px var(--color);
+    filter: blur(3px);
+}
+
+#dead-panel #social-container ul li a:hover {
+    color: #ffa502;
+    box-shadow: 0 0 15px var(--color);
+    text-shadow: 0 0 15px var(--color);
+    background-image: var(--filled);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 3vw;
+    transform: translateY(-20px);
 }
 
 @keyframes BackgroundGradient {
