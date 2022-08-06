@@ -1,0 +1,137 @@
+#game-content .planete-1 {
+    display: none;
+    position: absolute;
+    background: linear-gradient(150deg, #ffd752 0%, #c67700 100%);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-left: 50px;
+    box-shadow: inset -8px 2px 2px hsla(38, 63%, 25%, 0.621);
+}
+
+#game-content .planete-1 .blur{
+    display: block;
+    position: relative;
+    top: -66px;
+    left: 0;
+    background: linear-gradient(150deg, #fcff9e 0%, #c67700 100%);;
+    width: 100px;
+    height: 100px;
+    filter: blur(5px);
+    border-radius: inherit;
+    border-radius: 50%;
+    z-index: -1;
+}
+
+#game-content .planete-1 .hole:nth-child(1) {
+    display: block;
+    position: relative;
+    top: 45px;
+    left: 30px;
+    width: 19px;
+    height: 18px;
+    background-color: rgb(215, 141, 0);
+    border-radius: 50%;
+    box-shadow: inset 1.4px -1.4px 0.7px hsl(38, 63%, 25%)
+}
+
+#game-content .planete-1 .hole:nth-child(2) {
+    display: block;
+    position: relative;
+    top: 25px;
+    left: 49px;
+    width: 10px;
+    height: 10px;
+    background-color: rgb(215, 141, 0);
+    border-radius: 50%;
+    box-shadow: inset 0.5px -1.4px 0.7px hsl(38, 63%, 25%);
+}
+
+#game-content .planete-1 .hole:nth-child(3) {
+    display: block;
+    position: relative;
+    top: -4px;
+    left: 21px;
+    width: 12px;
+    height: 12px;
+    background-color: rgb(210, 154, 47);
+    border-radius: 50%;
+    box-shadow: inset 0.5px -1.4px 0.7px hsl(38, 63%, 25%);
+}
+
+#game-content .planete-1 .hole:nth-child(4) {
+    display: block;
+    position: relative;
+    top: 5px;
+    left: 65px;
+    width: 16px;
+    height: 16px;
+    background-color: rgb(189, 131, 21);
+    border-radius: 50%;
+    box-shadow: inset 0.5px -1.4px 0.7px hsl(38, 63%, 25%);
+}
+
+#game-content .planete-1 .hole:nth-child(5) {
+    display: block;
+    position: relative;
+    top: 14px;
+    left: 18px;
+    width: 10px;
+    height: 10px;
+    background-color: rgb(204, 145, 32);
+    border-radius: 50%;
+    box-shadow: inset 0.5px -1.4px 0.7px hsl(38, 63%, 25%);
+}
+
+
+/*----------------------------------------------*/
+
+#game-content .planete-2 {
+    position: absolute;
+    top: 0;
+    display: none;
+    background: linear-gradient(150deg, #A8C0FF 0%, #3F2B96 100%);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-left: 50px;
+    box-shadow: inset -4px -5px 2px #3f2b969e;
+    color: #5741ba;
+    overflow: visible;
+    
+}
+#game-content .planete-2 .content {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+
+#game-content .planete-2 .shadow {
+    display: block;
+    box-shadow: inset -4px -5px 2px #3f2b969e;
+    position: relative;
+    top: -93px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+#game-content .planete-2 .blur{
+    display: block;
+    position: relative;
+    top: -100px;
+    left: 0;
+    background: linear-gradient(150deg, #efd5ff 0%, #515ada 100%);
+    width: 100px;
+    height: 100px;
+    filter: blur(5px);
+    border-radius: inherit;
+    border-radius: 50%;
+    z-index: -1;
+    overflow: visible;
+}
+
+/*--------------------------------------------------*/
