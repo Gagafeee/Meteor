@@ -14,7 +14,7 @@
     overflow: hidden;
 }
 
-body {
+body, html {
     overflow: hidden;
 }
 
@@ -59,7 +59,9 @@ body {
     font-size: 3vw;
     font-weight: 700;
     font-family: Chakra Petch;
+    z-index: 9;
 }
+
 #game-content[data-running="true"] #dead-panel {
     display: none;
 }
@@ -92,8 +94,10 @@ body {
 
 #dead-panel .title-container {
     width: 100%;
-    height: 40%;
-    /*background-color: aqua;*/
+    /* background-color: aqua;*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #dead-panel .title-container .title {
@@ -104,12 +108,146 @@ body {
     text-align: center;
 }
 
-#dead-panel .title-container #score {
+#dead-panel .title-container #score-container[data-open="false"] {
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s;
+}
+
+#dead-panel .title-container #score-container[data-open="false"] #score {
     color: #fff;
     font-size: 2vw;
     margin-top: -2vh;
     text-align: center;
+    transition: all 0.5s;
+}
+
+#dead-panel .title-container #score-container[data-open="false"] #sharebutton {
+    width: 2.5vw;
+    height: 2.5vw;
+    border-radius: 40%;
+    /* From https://css.glass */
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background-image: url(./icon/filled/rank.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 2vw;
+    margin-bottom: 2vh;
+    margin-left: 2vw;
+    transition: all 0.5s;
+}
+
+#dead-panel .title-container #score-container[data-open="true"] {
+    width: 100%;
+    height: 20vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s;
+}
+
+#dead-panel .title-container #score-container[data-open="true"] #score {
+    color: #fff;
+    font-size: 3vw;
+    margin-top: -2vh;
+    text-align: center;
+    transition: all 0.5s;
+}
+
+#dead-panel .title-container #score-container[data-open="true"] #sharebutton {
+    display: none;
+}
+
+#dead-panel .title-container #score-container[data-open="true"] .container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#dead-panel .title-container #score-container[data-open="true"] .container #sendbutton {
+    width: 50px;
+    height: 50px;
+    margin-left: 10px;
+    /* From https://css.glass */
+    background-color: rgba(255, 255, 255, 0.41);
+    border-radius: 50%;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.5s;
+    background-image: url(./icon/filled/right-arrow.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+#dead-panel .title-container #score-container[data-open="true"] .container #sendbutton:hover {
+    transform: translateX(10px) scale(1.1);
+}
+
+#dead-panel .title-container #score-container[data-open="false"] .container #usernameField {
+    display: none;
+}
+
+#dead-panel .title-container #score-container[data-open="true"] .container #usernameField {
+    width: 15vw;
+    height: 50%;
+    border-radius: 10px;
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0.41);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    font-size: 2vw;
+    font-family: Chakra Petch;
+    color: #fff;
+}
+
+::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #fff;
+    opacity: 1;
+    /* Firefox */
+}
+
+#dead-panel .title-container #score-container #sharebutton:hover {
+    transform: scale(1.1);
+}
+
+#dead-panel .title-container #score-container #sharebutton .displayer {
+    display: block;
+    position: relative;
+    left: -100px;
+    top: 60px;
+    width: 250px;
+    height: 40px;
+    /* From https://css.glass */
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s;
+    font-size: 1vw;
+    color: white;
+    font-weight: 200;
+    font-family: Chakra Petch;
 }
 
 #dead-panel .action-container {

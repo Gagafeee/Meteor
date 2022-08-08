@@ -15,26 +15,35 @@
     <link rel="stylesheet" type="text/css" href="player.css" />
     <link rel="stylesheet" type="text/css" href="planete.css" />
 
+
 </head>
 
 <body>
     <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
+
     <div id="game-content" data-running="false">
         <div id="dead-panel">
             <div class="title-container">
                 <div class="title">
                     <p>Meteor</p>
                 </div>
-                <p id="score">Last score : 0</p>
+                <div id="score-container" data-open="false">
+                    <p id="score">Last score : 0</p>
+                    <div id="sharebutton"><span class="displayer"><p>Save in universal rank</p></span></div>
+                    <div class="container">
+                        <input id="usernameField" type="texte" placeholder="username">
+                        <div id="sendbutton"></div>
+                    </div>
+                </div>
             </div>
             <div class="action-container">
                 <div class="button" id="play" style="--menubuttongradient: linear-gradient(90deg, #9ebd13 0%, #008552 100%);">
                     <p>Play</p>
                 </div>
                 <div class="button" id="ranking" style="--menubuttongradient: linear-gradient(90deg, hsl(340, 100%, 52%) 0%, hsl(41, 100%, 59%) 100%);">
-                    <p>Clasemment</p>
+                    <p>Classemment</p>
                 </div>
             </div>
             <div id="infos">
@@ -131,9 +140,11 @@
             P()
         </script>
     </div>
-    <script src="game.js"></script>
+    <script type="module" src="./database.js"></script>
+    <script type="module" src="game.js"></script>
 
-    <script>
+    <script type="module">
+        import {Load} from "./game.js"
         Load();
     </script>
 </body>

@@ -2,19 +2,35 @@ var globalSpeed = 3;
 var player = document.getElementById("player");
 var game_content = document.getElementById("game-content");
 var deadPanel = document.getElementById("dead-panel");
-var velocity = 0;
 var difficulty = 10;
 var pgenerated = document.getElementById("generated-planete");
 var scoreDisplay = document.getElementById("score-displayer");
 var score = 0;
 
-function Load() {
+import { saveScore } from "./database.js"
+
+export function Load() {
     var scoreTitle = document.getElementById("score");
     var playButton = document.getElementById("play");
     var rankButton = document.getElementById("ranking");
     scoreTitle.innerText = "Last Score : " + (getCookie("score") != "" ? getCookie("score") : 0)
+    if (getCookie("score") == 0) {
+        document.getElementById("sharebutton").style.display = "none";
+    }
+    if(getCookie("username") != ""){
+        document.getElementById("usernameField").value = getCookie("username")
+    }
     playButton.addEventListener("click", () => {
         Play()
+    })
+    document.getElementById("sharebutton").addEventListener("click", () => {
+        document.getElementById("score-container").dataset.open = "true";
+    })
+    document.getElementById("sendbutton").addEventListener("click", () => {
+        share(parseInt(getCookie("score")));
+    })
+    document.getElementById("ranking").addEventListener("click", ()=>{
+        window.location = "./rank.html"
     })
     document.addEventListener('keydown', function(event) {
         if (event.keyCode == 38) {
@@ -23,7 +39,7 @@ function Load() {
             setTimeout(() => {
                 if (player.dataset.dir == "up") player.dataset.dir = "none"
             }, 1000);
-    
+
         } else if (event.keyCode == 40) {
             Move(1)
             player.dataset.dir = "down"
@@ -42,6 +58,7 @@ function Play() {
     game_content.style.setProperty("--speed", globalSpeed + "s");
     game_content.style.setProperty("--widght", game_content.clientWidth + "px");
     game_content.style.setProperty("--height", game_content.clientHeight + "px");
+    document.getElementById("score-container").dataset.open = "false";
     //remove all planetes
     while (pgenerated.hasChildNodes()) {
         pgenerated.removeChild(pgenerated.firstChild);
@@ -55,7 +72,7 @@ function Play() {
 
     //remove panel
 
-    $({ blurRadius: 8.6,blurRadius2: 0 }).animate({
+    $({ blurRadius: 8.6, blurRadius2: 0 }).animate({
         blurRadius: 0,
         blurRadius2: 10,
         opacity: 0
@@ -70,12 +87,12 @@ function Play() {
             });
         }
     });
-    
+
     setTimeout(() => {
-        
+
         game_content.dataset.running = "true";
         P()
-        //game running
+            //game running
         var game = setInterval(() => {
             if (game_content.dataset.running == "false") { clearInterval(game) }
             //for move
@@ -145,6 +162,23 @@ function Play() {
 
 }
 
+function share(s) {
+    console.log("sharing...");
+    var uname = document.getElementById("usernameField").value;
+    var btn = document.getElementById("sendbutton");
+    btn.style.backgroundImage = "url(./icon/loader.svg)";
+    saveScore(s, uname)
+        .then(() => {
+            btn.style.backgroundImage = "url(./icon/filled/done.png)";
+            setCookie("username",uname, 1000)
+        })
+        .catch((err) => {
+            //if(err == "not upper")
+            btn.style.backgroundImage = "url(./icon/filled/cross.png)";
+            console.log(err);
+        })
+}
+
 function Move(direction) {
     if (game_content.dataset.running == "true") {
         //move
@@ -174,17 +208,18 @@ function StopGame() {
     if (game_content.dataset.running = "true") {
         var planetesgene = pgenerated.getElementsByClassName("planete-generated");
         var scoreTitle = document.getElementById("score");
+        document.getElementById("sharebutton").style.display = (score == 0 ? "none" : "block");
         game_content.dataset.running = "false";
         deadPanel.style.filter = "none"
         deadPanel.style.backdropFilter = "blur(5px)"
-        //clear interval running
+            //clear interval running
         for (let i = 0; i < planetesgene.length; i++) {
             $(planetesgene[i]).stop(true, false);
         }
         P()
         scoreTitle.innerText = "Last score : " + score;
         setCookie("score", score, 1000)
-        
+
     }
 
 }
@@ -193,24 +228,23 @@ function getCookie(cname) {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
     let ca = decodedCookie.split(';');
-    for(let i = 0; i <ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
     }
     return "";
-  }
+}
 
 
-  function setCookie(c_name,c_value,exdays) {
-    var exdate=new Date();
+function setCookie(c_name, c_value, exdays) {
+    var exdate = new Date();
     exdate.setDate(exdate.getDate() + exdays);
-    document.cookie=encodeURIComponent(c_name) 
-      + "=" + encodeURIComponent(c_value)
-      + (!exdays ? "" : "; expires="+exdate.toUTCString());
-      ;
- }
+    document.cookie = encodeURIComponent(c_name) +
+        "=" + encodeURIComponent(c_value) +
+        (!exdays ? "" : "; expires=" + exdate.toUTCString());;
+}
